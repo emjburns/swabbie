@@ -46,7 +46,7 @@ abstract class ScheduledAgent(
 ) : SwabbieAgent, MetricsSupport(registry) {
   private val log: Logger = LoggerFactory.getLogger(javaClass)
   private val executorService = Executors.newSingleThreadScheduledExecutor()
-  private val startupExecutorService = Executors.newSingleThreadScheduledExecutor()
+  private val startupExecutorService = Executors.newScheduledThreadPool(2)
 
   override val onDiscoveryUpCallback: (event: RemoteStatusChangedEvent) -> Unit
     get() = { waitForCacheThenStart() }
